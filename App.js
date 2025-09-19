@@ -1,0 +1,52 @@
+import 'react-native-gesture-handler'; // ต้องอยู่บนสุด!
+import React from 'react';
+import { View, Text, Button } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+// ตัวอย่างหน้าต่าง ๆ
+function HomeScreen({ navigation }) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ fontSize: 24 }}>🏠 หน้าหลัก (Home)</Text>
+      <Button title="เปิดเมนู" onPress={() => navigation.openDrawer()} />
+    </View>
+  );
+}
+
+function ProfileScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ fontSize: 24 }}>👤 โปรไฟล์ (Profile)</Text>
+    </View>
+  );
+}
+
+function SettingsScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text style={{ fontSize: 24 }}>⚙️ การตั้งค่า (Settings)</Text>
+    </View>
+  );
+}
+
+// สร้าง Drawer Navigator
+const Drawer = createDrawerNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Drawer.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          drawerType: 'slide',
+          drawerStyle: { backgroundColor: '#f5f5f5', width: 240 },
+        }}
+      >
+        <Drawer.Screen name="Home" component={HomeScreen} />
+        <Drawer.Screen name="Profile" component={ProfileScreen} />
+        <Drawer.Screen name="Settings" component={SettingsScreen} />
+      </Drawer.Navigator>
+    </NavigationContainer>
+  );
+}
